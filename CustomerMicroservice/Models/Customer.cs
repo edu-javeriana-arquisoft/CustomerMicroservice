@@ -11,7 +11,7 @@ namespace CustomerMicroservice.Models
         [StringLength(50)]
         public string Name { get; set; }
         [Required]
-        [StringLength(20)]
+        [StringLength(50)]
         [EmailAddress]
         public string Email { get; set; }
         public string Phone {  get; set; }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\estudiante\\Desktop\\CustomerMicroservice\\CustomerMicroservice\\CustomerMicroservice.csproj": {}
+    "C:\\Users\\estudiante\\Desktop\\Microservicios\\CustomerMicroserviceR\\CustomerMicroservice\\CustomerMicroservice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\estudiante\\Desktop\\CustomerMicroservice\\CustomerMicroservice\\CustomerMicroservice.csproj": {
+    "C:\\Users\\estudiante\\Desktop\\Microservicios\\CustomerMicroserviceR\\CustomerMicroservice\\CustomerMicroservice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\estudiante\\Desktop\\CustomerMicroservice\\CustomerMicroservice\\CustomerMicroservice.csproj",
+        "projectUniqueName": "C:\\Users\\estudiante\\Desktop\\Microservicios\\CustomerMicroserviceR\\CustomerMicroservice\\CustomerMicroservice.csproj",
         "projectName": "CustomerMicroservice",
-        "projectPath": "C:\\Users\\estudiante\\Desktop\\CustomerMicroservice\\CustomerMicroservice\\CustomerMicroservice.csproj",
+        "projectPath": "C:\\Users\\estudiante\\Desktop\\Microservicios\\CustomerMicroserviceR\\CustomerMicroservice\\CustomerMicroservice.csproj",
         "packagesPath": "C:\\Users\\estudiante\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\estudiante\\Desktop\\CustomerMicroservice\\CustomerMicroservice\\obj\\",
+        "outputPath": "C:\\Users\\estudiante\\Desktop\\Microservicios\\CustomerMicroserviceR\\CustomerMicroservice\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\estudiante\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -42,17 +42,29 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.2, )"
+              "version": "[7.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.23, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[6.0.23, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.2, )"
+              "version": "[7.0.13, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[6.0.16, )"
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0, )"
             }
           },
           "imports": [

@@ -15,7 +15,7 @@ namespace CustomerMicroservice.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.2")
+                .HasAnnotation("ProductVersion", "7.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("CustomerMicroservice.Models.Customer", b =>
@@ -30,8 +30,8 @@ namespace CustomerMicroservice.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -53,7 +53,6 @@ namespace CustomerMicroservice.Migrations
             modelBuilder.Entity("CustomerMicroservice.Models.CustomerPreference", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("CustomerId")
@@ -65,8 +64,6 @@ namespace CustomerMicroservice.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
-
                     b.ToTable("CustomerPreferences");
                 });
 
@@ -74,7 +71,7 @@ namespace CustomerMicroservice.Migrations
                 {
                     b.HasOne("CustomerMicroservice.Models.Customer", "Customer")
                         .WithMany("CustomerPreference")
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
