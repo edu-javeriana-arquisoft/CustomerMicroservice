@@ -47,15 +47,13 @@ namespace CustomerMicroservice.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customer");
                 });
 
-            modelBuilder.Entity("CustomerMicroservice.Models.CustomerPreference", b =>
+            modelBuilder.Entity("CustomerMicroservice.Models.Preference", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CustomerId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("PreferenceName")
@@ -64,23 +62,37 @@ namespace CustomerMicroservice.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CustomerPreferences");
+                    b.ToTable("Preferences");
                 });
 
-            modelBuilder.Entity("CustomerMicroservice.Models.CustomerPreference", b =>
+            modelBuilder.Entity("CustomerPreference", b =>
                 {
-                    b.HasOne("CustomerMicroservice.Models.Customer", "Customer")
-                        .WithMany("CustomerPreference")
-                        .HasForeignKey("Id")
+                    b.Property<int>("CustomersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PreferencesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CustomersId", "PreferencesId");
+
+                    b.HasIndex("PreferencesId");
+
+                    b.ToTable("CustomerPreference");
+                });
+
+            modelBuilder.Entity("CustomerPreference", b =>
+                {
+                    b.HasOne("CustomerMicroservice.Models.Customer", null)
+                        .WithMany()
+                        .HasForeignKey("CustomersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("CustomerMicroservice.Models.Customer", b =>
-                {
-                    b.Navigation("CustomerPreference");
+                    b.HasOne("CustomerMicroservice.Models.Preference", null)
+                        .WithMany()
+                        .HasForeignKey("PreferencesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

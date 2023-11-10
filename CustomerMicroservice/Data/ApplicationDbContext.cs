@@ -1,4 +1,5 @@
-﻿using System.Reflection.Metadata;
+﻿using Microsoft.Extensions.Hosting;
+using System.Reflection.Metadata;
 
 namespace CustomerMicroservice.Data
 {
@@ -12,12 +13,11 @@ namespace CustomerMicroservice.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>()
-                .HasMany(c => c.CustomerPreference)
-                .WithOne(e => e.Customer)
-                .HasForeignKey(e => e.Id)
-                .IsRequired();
+                .HasMany(e => e.Preferences)
+                .WithMany(e => e.Customers);
         }
         public  DbSet<Customer> Customers { get; set; }
-        public DbSet<CustomerPreference> CustomerPreferences { get; set; }
+        public DbSet<Preference> Preferences { get; set; }
+
     }
 }

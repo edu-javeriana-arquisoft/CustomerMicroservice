@@ -1,7 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace CustomerMicroservice.Models
+﻿namespace CustomerMicroservice.Models
 {
+    [Table("Customer")]
     [Index(nameof(Email), IsUnique = true)]
     public class Customer
     {
@@ -10,16 +9,15 @@ namespace CustomerMicroservice.Models
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
+
         [Required]
         [StringLength(50)]
         [EmailAddress]
         public string Email { get; set; }
         public string Phone {  get; set; }
         public string Address { get; set; }
-        public virtual ICollection<CustomerPreference> CustomerPreference
-        {
-            get;
-            set;
-        } = new List<CustomerPreference>();
+        public List<Preference>? Preferences { get; set; } = new();
+        
+        
     }
 }

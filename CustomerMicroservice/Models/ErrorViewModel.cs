@@ -1,4 +1,4 @@
-namespace CustomerMicroservice.Models
+﻿namespace CustomerMicroservice.Models
 {
     public class ErrorViewModel
     {
