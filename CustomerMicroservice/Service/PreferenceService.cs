@@ -6,7 +6,7 @@ namespace CustomerMicroservice.Service
     public class PreferenceService : IPreferenceService
     {
         private readonly PreferenceRepository _preferenceRepository;
-        private readonly CustomerService _customerService;
+       
         private readonly IMapper _mapper;
         public PreferenceService(PreferenceRepository preferenceRepository, IMapper mapper)
         {
@@ -19,6 +19,9 @@ namespace CustomerMicroservice.Service
             throw new NotImplementedException();
         }
 
-       
+        public Task<Preference> GetPreferenceByName(string name)
+        {
+            return _preferenceRepository.GetPreferenceByName(name);
+        }
     }
 }

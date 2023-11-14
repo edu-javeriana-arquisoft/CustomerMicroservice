@@ -2,5 +2,6 @@
 {
     public interface IPreferenceRepository
     {
+        Task<Preference> GetPreferenceByName(string name);
     }
 }

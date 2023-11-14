@@ -1,5 +1,6 @@
 ﻿using CustomerMicroservice.Data.Interface;
 using Microsoft.EntityFrameworkCore;
+using MySqlX.XDevAPI.Common;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace CustomerMicroservice.Data.Repository
@@ -7,16 +8,21 @@ namespace CustomerMicroservice.Data.Repository
     public class CustomerRepository : ICustomerRepository
     {
         private readonly ApplicationDbContext _context;
+        
         private readonly DbSet<Customer> _customers;
+
         public CustomerRepository(ApplicationDbContext context) {
             _context = context;
             _customers = context.Customers;
         }
 
-        public async Task AddCustomer(Customer customer)
+        public async Task<Customer> AddCustomer(Customer customer)
         {
+            
+
             await _customers.AddAsync(customer);
             await _context.SaveChangesAsync();
+            return customer;
         }
 
         public Task<Customer> GetCustomer(int customerId)

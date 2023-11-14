@@ -35,7 +35,10 @@ namespace CustomerMicroservice.Controllers
             }
 
             Customer createdCustomer = await _customerService.CreateCustomer(customer);
-
+            if (createdCustomer == null)
+            {
+                return BadRequest("Preference must exist");
+            }
             return CreatedAtAction(nameof(CreateCustomer), new { id = customer.Id }, createdCustomer);
         }
 
