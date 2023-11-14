@@ -11,6 +11,7 @@ using CustomerMicroservice.Service;
 using CustomerMicroservice.Service.Interfaces;
 using CustomerMicroservice.DTO;
 using AutoMapper;
+using MySql.Data.MySqlClient;
 
 namespace CustomerMicroservice.Controllers
 {
@@ -29,20 +30,45 @@ namespace CustomerMicroservice.Controllers
         [HttpPost]
         public async Task<ActionResult<Customer>> CreateCustomer([FromBody] CustomerDTO customer)
         {
-            if (customer == null)
+            try
             {
-                return BadRequest("CustomerDTO cannot be null.");
-            }
+                if (customer == null)
+                {
+                    return BadRequest("CustomerDTO cannot be null.");
+                }
 
-            Customer createdCustomer = await _customerService.CreateCustomer(customer);
-            if (createdCustomer == null)
-            {
-                return BadRequest("Preference must exist");
+                Customer createdCustomer = await _customerService.CreateCustomer(customer);
+                if (createdCustomer == null)
+                {
+                    return BadRequest("Preference must exist");
+                }
+                return CreatedAtAction(nameof(CreateCustomer), new { id = customer.Id }, createdCustomer);
             }
-            return CreatedAtAction(nameof(CreateCustomer), new { id = customer.Id }, createdCustomer);
+            catch (DbUpdateException ex) when (ex.InnerException is MySqlException mysqlException && mysqlException.Number == 1062)
+            {
+                return Conflict("El correo electrónico ya está en uso.");
+            }
+            
         }
 
+        [HttpGet("GetPreferences/{customerId}")]
+        public async Task<ActionResult<List<Preference>>> GetPreferences(int customerId)
+        {
+            try
+            {
+                var preferences = await _customerService.GetPreferences(customerId);
+                if (preferences == null || preferences.Count == 0)
+                {
+                    return NotFound("No se encontraron preferencias para el cliente.");
+                }
 
+                return Ok(preferences);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
+            }
+        }
 
     }
 }

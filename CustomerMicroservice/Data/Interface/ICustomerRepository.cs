@@ -6,5 +6,6 @@ namespace CustomerMicroservice.Data.Interface
     {
         Task<Customer> AddCustomer(Customer customer);
         Task<Customer> GetCustomer(int customerId);
+        Task<List<Preference>> GetPreferences(int customerId);
     }
 }

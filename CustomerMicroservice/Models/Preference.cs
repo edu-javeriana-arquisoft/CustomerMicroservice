@@ -1,4 +1,6 @@
-﻿namespace CustomerMicroservice.Models
+﻿using System.Text.Json.Serialization;
+
+namespace CustomerMicroservice.Models
 {
     [Table("Preference")]
     public class Preference
@@ -9,6 +11,7 @@
         [Required]
 
         public string PreferenceName { get; set; }
+        [JsonIgnore]
         public List<Customer> Customers { get; set; } = new List<Customer>();
     }
 }

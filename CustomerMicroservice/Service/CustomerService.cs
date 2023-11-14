@@ -37,7 +37,11 @@ namespace CustomerMicroservice.Service
             customer.Preferences = updatedPreferences;
             return await _customerRepository.AddCustomer(customer);
         }
-      
+
+        public Task<List<Preference>> GetPreferences(int customerId)
+        {
+            return _customerRepository.GetPreferences(customerId);
+        }
     }
         
    }
