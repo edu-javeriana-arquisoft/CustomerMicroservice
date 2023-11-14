@@ -62,7 +62,7 @@ namespace CustomerMicroservice.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Preferences");
+                    b.ToTable("Preference");
                 });
 
             modelBuilder.Entity("CustomerPreference", b =>

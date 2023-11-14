@@ -2,7 +2,7 @@
 {
     public class PreferenceDTO
     {
-        public List<String> Preferences { get; set; }
-        public String CustomerId { get; set; }
+        public string Name { get; set; }
+        public int CustomerId { get; set; }
     }
 }

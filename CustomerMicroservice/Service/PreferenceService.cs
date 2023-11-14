@@ -13,22 +13,12 @@ namespace CustomerMicroservice.Service
             _preferenceRepository = preferenceRepository;
             _mapper = mapper;
         }
-        public async Task<Preference> AddPreference(PreferenceDTO preferenceDTO, String customerId)
+
+        public Task<Preference> AddPreference(PreferenceDTO preferenceDTO)
         {
-            var preference = _mapper.Map<Preference>(preferenceDTO);
-            preference.Customers.Add(_customerService.get)
-            await _preferenceRepository.AddPreference(preference);
-            return preference;
+            throw new NotImplementedException();
         }
 
-        public Task<Preference> GetPreferenceById(int id)
-        {
-            return _preferenceRepository.GetPreferenceById(id);
-        }
-
-        public async Task<Preference> GetPreferenceByName(string name)
-        {
-            return await _preferenceRepository.GetPreferenceByName(name);
-        }
+       
     }
 }

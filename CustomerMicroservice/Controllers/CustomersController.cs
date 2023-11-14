@@ -9,6 +9,8 @@ using CustomerMicroservice.Data;
 using CustomerMicroservice.Models;
 using CustomerMicroservice.Service;
 using CustomerMicroservice.Service.Interfaces;
+using CustomerMicroservice.DTO;
+using AutoMapper;
 
 namespace CustomerMicroservice.Controllers
 {
@@ -17,26 +19,24 @@ namespace CustomerMicroservice.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly CustomerService _customerService;
-        private readonly PreferenceService _preferenceService;
+        private readonly IMapper _mapper;
 
-        public CustomersController(CustomerService _customerService)
+        public CustomersController(CustomerService customerService)
         {
-            _customerService = _customerService;
+            _customerService = customerService;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Customer>> CreateCustomer(CustomerDTO customer)
+        public async Task<ActionResult<Customer>> CreateCustomer([FromBody] CustomerDTO customer)
         {
-
-            var preferenceList = customer.preferences;
-            List<Preference> realPreferences = new List<Preference>();
-            foreach (String pref in preferenceList)
+            if (customer == null)
             {
-                var realPreference = _preferenceService.GetPreferenceByName(pref);
-                realPreferences.Add(await realPreference);
+                return BadRequest("CustomerDTO cannot be null.");
             }
-            var newCustomer = await _customerService.CreateCustomer(customer,realPreferences);
-            return CreatedAtAction("GetCustomer", new { id = newCustomer.Id }, newCustomer);
+
+            Customer createdCustomer = await _customerService.CreateCustomer(customer);
+
+            return CreatedAtAction(nameof(CreateCustomer), new { id = customer.Id }, createdCustomer);
         }
 
 

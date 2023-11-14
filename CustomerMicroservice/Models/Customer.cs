@@ -1,4 +1,6 @@
-﻿namespace CustomerMicroservice.Models
+﻿using System.Text.Json.Serialization;
+
+namespace CustomerMicroservice.Models
 {
     [Table("Customer")]
     [Index(nameof(Email), IsUnique = true)]
@@ -16,8 +18,9 @@
         public string Email { get; set; }
         public string Phone {  get; set; }
         public string Address { get; set; }
-        public List<Preference>? Preferences { get; set; } = new();
-        
-        
+        [JsonIgnore]
+        public List<Preference> Preferences { get; set; } = new List<Preference>();
+
+
     }
 }

@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
+using CustomerMicroservice.DTO;
 using CustomerMicroservice.Service.Interfaces;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace CustomerMicroservice.Service
 {
     public class CustomerService : ICustomerService
     {
         private readonly CustomerRepository _customerRepository;
+        
         private readonly IMapper _mapper;
         public CustomerService(CustomerRepository customerRepository, IMapper mapper)
         {
@@ -13,10 +16,9 @@ namespace CustomerMicroservice.Service
             _mapper = mapper;
         }
 
-        public async Task<Customer> CreateCustomer(CustomerDTO CustomerDTO, List<Preference> preferences)
+        public async Task<Customer> CreateCustomer(CustomerDTO CustomerDTO)
         {
-            var customer = _mapper.Map<Customer>(CustomerDTO);
-            customer.Preferences = preferences;
+            Customer customer = _mapper.Map<CustomerDTO, Customer>(CustomerDTO);
             await _customerRepository.AddCustomer(customer);
             return customer;
         }

@@ -2,5 +2,7 @@
 {
     public interface IPreferenceService
     {
+        Task<Preference> AddPreference(PreferenceDTO preferenceDTO);
+       
     }
 }
