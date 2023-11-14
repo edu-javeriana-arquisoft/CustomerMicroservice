@@ -46,7 +46,7 @@ namespace CustomerMicroservice.Controllers
             }
             catch (DbUpdateException ex) when (ex.InnerException is MySqlException mysqlException && mysqlException.Number == 1062)
             {
-                return Conflict("El correo electrónico ya está en uso.");
+                return Conflict("E-mail is already in use.");
             }
             
         }
