@@ -1,4 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Steeltoe.Discovery.Client;
+using Steeltoe.Extensions.Configuration;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -14,7 +17,7 @@ builder.Services.AddScoped<CustomerRepository>();
 builder.Services.AddScoped<PreferenceService>();
 builder.Services.AddScoped<PreferenceRepository>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
-
+builder.Services.AddDiscoveryClient(builder.Configuration);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseMySQL(connectionString);
@@ -30,6 +33,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseDiscoveryClient();
 app.UseAuthorization();
 
 app.MapControllers();
