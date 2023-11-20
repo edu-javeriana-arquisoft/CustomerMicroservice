@@ -34,6 +34,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseDiscoveryClient();
+
 app.UseAuthorization();
 
 app.MapControllers();
