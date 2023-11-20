@@ -8,9 +8,11 @@ RUN dotnet restore
 
 RUN dotnet publish -c Release -o out
 
-EXPOSE 8071
+
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /App
+
 COPY --from=build-env /App/out .
+EXPOSE 8080
 ENTRYPOINT ["dotnet", "CustomerMicroservice.dll"]
